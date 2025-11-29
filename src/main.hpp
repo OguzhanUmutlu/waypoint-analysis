@@ -5,6 +5,7 @@
 #include "Unit.hpp"
 #include "Vector2.hpp"
 #include "Rect.hpp"
+#include "safe_mutex.hpp"
 using namespace std;
 using namespace Unit::defaults;
 using Texture      = sf::Texture;
@@ -15,13 +16,14 @@ using RenderTarget = sf::RenderTarget;
 using VideoMode    = sf::VideoMode;
 using Event        = sf::Event;
 using Color        = sf::Color;
+using MouseButton  = sf::Mouse::Button;
 
 using mps    = decltype(m{} / s{});
 using mps2   = decltype(m{} / s{} / s{});
 using rad_ps = decltype(rad{} / s{});
 using deg_ps = decltype(deg{} / s{});
 
-static auto get_time_s() {
+static auto get_time() {
     return s{
         static_cast<double>(chrono::high_resolution_clock::now().time_since_epoch() /
             chrono::microseconds(1)) / 1e6f

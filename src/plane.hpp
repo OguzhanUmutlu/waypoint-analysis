@@ -8,7 +8,7 @@ static Rect Geofence{0_m, 0_m, ScreenSize.x * px2m, ScreenSize.y * px2m};
 struct Plane {
     Sprite stable_sprite;
     Sprite moving_sprite;
-
+    mutex mtx;
     Vector2<m> position{};
     rad yaw{};
     rad roll{};
@@ -57,11 +57,16 @@ struct Plane {
     }
 
     void reset();
-    rad decide_roll(s _dt) const;
+    rad decide_roll();
     void update(s dt);
     void draw(RenderTarget& window);
 
     static Vector2<mps2> wind_acceleration();
+
+    void set_waypoint(const Vector2<m>& wp) {
+        safe_mutex _{mtx};
+        waypoint = wp;
+    }
 
 private:
     static bool texture_loaded[2];

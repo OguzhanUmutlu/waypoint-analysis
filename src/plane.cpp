@@ -6,6 +6,7 @@ bool Plane::texture_loaded[2] = {false, false};
 Texture Plane::textures[2]{};
 
 void Plane::reset() {
+    safe_mutex _{mtx};
     position    = {ScreenSize.x * px2m * 0.5, ScreenSize.y * px2m * 0.5};
     yaw         = 0_rad;
     roll        = 0_rad;
@@ -13,7 +14,8 @@ void Plane::reset() {
     velocity    = {mps{0}, mps{-5}};
 }
 
-rad Plane::decide_roll(s _dt) const {
+rad Plane::decide_roll() {
+    safe_mutex _{mtx};
     auto speed = velocity.length();
 
     auto effective_speed = std::max(speed, mps{1.0});
@@ -80,8 +82,10 @@ rad Plane::decide_roll(s _dt) const {
     return std::clamp(final_command, -max_roll, max_roll);
 }
 
+
 void Plane::update(s dt) {
-    target_roll = decide_roll(dt);
+    safe_mutex _{mtx};
+    target_roll = decide_roll();
 
     auto roll_difference = target_roll - roll;
 
@@ -122,6 +126,7 @@ void Plane::update(s dt) {
 }
 
 void Plane::draw(RenderTarget& window) {
+    safe_mutex _{mtx};
     auto final_scale = sprite_initial_scale * 4.0f;
 
     stable_sprite.setPosition(pos_to_screen(position));

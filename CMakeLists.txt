@@ -12,7 +12,8 @@ add_executable(waypoint_analysis
         src/plane.cpp
         src/Unit.hpp
         src/Vector2.hpp
-        src/Rect.hpp)
+        src/Rect.hpp
+        src/safe_mutex.hpp)
 
 target_link_libraries(waypoint_analysis PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)
 
