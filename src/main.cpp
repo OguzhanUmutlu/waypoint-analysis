@@ -12,7 +12,7 @@ int main() {
 
     auto last = get_time();
     s render_accumulator{};
-    bool mouse_down              = false;
+    bool mouse_down = false;
 
     std::atomic is_running = true;
 
@@ -80,7 +80,5 @@ int main() {
 
     is_running.store(false);
 
-    if (thread.joinable()) {
-        thread.join();
-    }
+    if (thread.joinable()) thread.join();
 }
