@@ -17,11 +17,11 @@ int main() {
     s render_accumulator{};
     bool mouse_down = false;
 
-    std::atomic is_running = true;
+    atomic is_running = true;
 
-    auto fixed_wing = std::make_shared<Plane>();
+    auto fixed_wing = make_shared<Plane>();
 
-    std::thread thread([fixed_wing, &is_running]() {
+    thread thread([fixed_wing, &is_running]() {
         auto t_last = get_time();
         while (is_running.load()) {
             auto t_now = get_time();
