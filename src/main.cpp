@@ -1,5 +1,7 @@
 #include "main.hpp"
 
+#include <thread>
+#include <atomic>
 #include <optional>
 #include "plane.hpp"
 
@@ -9,6 +11,7 @@ constexpr auto TargetUPS = 300_Hz;
 
 int main() {
     RenderWindow window(VideoMode({ScreenSize.x.value, ScreenSize.y.value}), "2D Fixed-Wing Simulation");
+    window.setVerticalSyncEnabled(true);
 
     auto last = get_time();
     s render_accumulator{};
