@@ -12,13 +12,15 @@ int main() {
 
     auto last = get_time();
     s render_accumulator{};
-    bool mouse_down = false;
+    bool mouse_down              = false;
+
+    std::atomic is_running = true;
 
     auto fixed_wing = std::make_shared<Plane>();
 
-    std::thread thread([&fixed_wing]() {
+    std::thread thread([fixed_wing, &is_running]() {
         auto t_last = get_time();
-        while (true) {
+        while (is_running.load()) {
             auto t_now = get_time();
             auto dt    = t_now - t_last;
 
@@ -74,5 +76,11 @@ int main() {
         fixed_wing->draw(window);
         window.display();
         window.setTitle("2D Fixed-Wing Simulation");
+    }
+
+    is_running.store(false);
+
+    if (thread.joinable()) {
+        thread.join();
     }
 }
