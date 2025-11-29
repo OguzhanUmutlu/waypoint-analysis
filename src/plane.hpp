@@ -1,6 +1,7 @@
 #pragma once
 
 #include "main.hpp"
+#include "safe_mutex.hpp"
 
 constexpr Vector2 Wind{mps2{15}, mps2{0}};
 static Rect Geofence{0_m, 0_m, ScreenSize.x * px2m, ScreenSize.y * px2m};

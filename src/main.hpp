@@ -2,9 +2,9 @@
 #include <iostream>
 #include <mutex>
 #include <SFML/Graphics.hpp>
-#include "Unit.hpp"
-#include "Vector2.hpp"
-#include "Rect.hpp"
+#include "lib/Unit.hpp"
+#include "lib/Vector2.hpp"
+#include "lib/Rect.hpp"
 using namespace std;
 using namespace Unit::defaults;
 using Texture      = sf::Texture;

@@ -1,6 +1,18 @@
+/*
+* Unit.hpp
+ * A header-only C++20 library for compile-time dimensional analysis and unit conversion.
+ *
+ * Version: 0.14
+ * Author:  OguzhanUmutlu
+ * GitHub:  https://github.com/OguzhanUmutlu/unit.hpp
+ *
+ * Licensed under the MIT License.
+ */
+
 #pragma once
 #include <iostream>
 #include <algorithm>
+#include "Vector2.hpp"
 
 template <typename T>
 struct Rect {
