@@ -5,7 +5,6 @@
 #include "Unit.hpp"
 #include "Vector2.hpp"
 #include "Rect.hpp"
-#include "safe_mutex.hpp"
 using namespace std;
 using namespace Unit::defaults;
 using Texture      = sf::Texture;
